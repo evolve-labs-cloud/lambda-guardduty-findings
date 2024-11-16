@@ -105,6 +105,8 @@ This policy provides permissions for:
 
 ```
 
+# Error Handling & Monitoring Guide
+
 ## Error Handling
 
 The function includes comprehensive error handling for:
@@ -133,25 +135,19 @@ Monitor the function using:
 ## Troubleshooting
 
 Common issues and solutions:
-1. **No notifications received:**
-   - Verify webhook URL is correct
-   - Check minimum severity level setting
-   - Ensure EventBridge rule is properly configured
 
-2. **Missing information in notifications:**
-   - Verify GuardDuty finding contains expected fields
-   - Check CloudWatch Logs for parsing errors
+### 1. No notifications received
+- Verify webhook URL is correct
+- Check minimum severity level setting
+- Ensure EventBridge rule is properly configured
 
-3. **Function timeouts:**
-   - Increase Lambda timeout value
-   - Check Slack endpoint connectivity
+### 2. Missing information in notifications
+- Verify GuardDuty finding contains expected fields
+- Check CloudWatch Logs for parsing errors
 
-<!-- ## Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request -->
+### 3. Function timeouts
+- Increase Lambda timeout value
+- Check Slack endpoint connectivity
 
 ## License
 
