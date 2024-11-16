@@ -60,8 +60,10 @@ Slack notifications include:
    - Set the required environment variables
    - Configure the execution role
 
-3. **Configure GuardDuty:**
-   - Set up an EventBridge rule to forward GuardDuty findings to the Lambda function
+3. **Configure EventBridge:**
+   - Go to Amazon EventBridge console
+   - Create a new rule with the provided event pattern
+   - Select the Lambda function as the target
    - Ensure proper IAM permissions are in place
 
 ## Event Pattern
@@ -89,6 +91,7 @@ The Lambda function requires the following permissions:
         "ec2:CreateNetworkInterface",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DeleteNetworkInterface",
+        "ecs:DescribeTaskDefinition",
         "logs:GetLogEvents",
         "logs:DescribeLogStreams"
       ],
@@ -101,15 +104,13 @@ The Lambda function requires the following permissions:
 This policy provides permissions for:
 
 - Network interface management (required for Lambda VPC access)
+- ECS task definition access
 - CloudWatch Logs access for monitoring and debugging
-
-```
-
-# Error Handling & Monitoring Guide
 
 ## Error Handling
 
 The function includes comprehensive error handling for:
+
 - Missing event keys
 - Invalid severity levels
 - Failed Slack notifications
@@ -120,6 +121,7 @@ All errors are logged to CloudWatch Logs for debugging.
 ## Customization
 
 You can customize the function by:
+
 - Modifying severity thresholds in `get_severity_details()`
 - Adjusting the message format in `generate_slack_message()`
 - Adding additional event data to notifications
@@ -128,6 +130,7 @@ You can customize the function by:
 ## Monitoring
 
 Monitor the function using:
+
 - CloudWatch Logs for execution logs
 - CloudWatch Metrics for invocation statistics
 - Lambda function metrics for performance data
@@ -137,15 +140,18 @@ Monitor the function using:
 Common issues and solutions:
 
 ### 1. No notifications received
+
 - Verify webhook URL is correct
 - Check minimum severity level setting
 - Ensure EventBridge rule is properly configured
 
 ### 2. Missing information in notifications
+
 - Verify GuardDuty finding contains expected fields
 - Check CloudWatch Logs for parsing errors
 
 ### 3. Function timeouts
+
 - Increase Lambda timeout value
 - Check Slack endpoint connectivity
 
@@ -158,4 +164,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - AWS GuardDuty Documentation
 - Slack API Documentation
 - AWS Lambda Documentation
-```
