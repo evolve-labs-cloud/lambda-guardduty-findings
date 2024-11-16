@@ -89,7 +89,6 @@ The Lambda function requires the following permissions:
         "ec2:CreateNetworkInterface",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DeleteNetworkInterface",
-        "ecs:DescribeTaskDefinition",
         "logs:GetLogEvents",
         "logs:DescribeLogStreams"
       ],
@@ -102,7 +101,6 @@ The Lambda function requires the following permissions:
 This policy provides permissions for:
 
 - Network interface management (required for Lambda VPC access)
-- ECS task definition access
 - CloudWatch Logs access for monitoring and debugging
 
 ```
